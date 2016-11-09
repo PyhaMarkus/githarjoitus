@@ -56,23 +56,106 @@ Näyttäisi toimineen. Katsoin mitä kansiosta löytyi komennolla $ ls, ja repos
 
 Nyt tuli luoda se tiedosto, johon laitan moduulini.
 
----------------------
 
 Moduuli:
 ---------------------
+Moduulina käytän edellisessä harjoitus 4:ssä luomaani moduulia, mutta teen siihen pieniä muutoksia.
+
+Navigoin kansioon "harjoitus"ja tein sinne seuraavat kansiot:
+
+$ mkdir modules
+
+$ mkdir asennus
+
+$ mkdir manifests
+
+> xubuntu@xubuntu:~/harjoitus/githarjoitus/modules/asennus/manifests$ 
+
+Manifests kansioon tein nanolla init.pp tiedoston.
+
+$ nano init.pp
+
+Kyseiseen tiedostoon tein laitoin seuraavan tekstin:
+
+class asennus {
+
+Package {ensure => "installed", allowcdrom => "true"}
+ package {"gedit":}
+ package { "tree":}
+ package { "munin":}
+ package { "apache2":}
+ package { "ssh":}
+
+file { "/home/xubuntu/public_html/index.html":
+ content => "It's working! Welcome user!\n",
+ 
+ }
 
 
+ file { "/etc/apache2/mods-enabled/userdir.conf":
+ ensure => "link",
+ target => "../mods-available/userdir.conf",
+ notify => Service ["apache2"],
+ 
+ }
+
+file { "/etc/apache2/mods-enabled/userdir.load":
+ ensure => "link",
+ target => "../mods-available/userdir.load",
+ notify => Service ["apache2"],
+
+}
+ 
+ service { "apache2":
+ ensure => "true",
+ enable => "true",
+
+}
+
+
+}
 
 
 
 Tehtävänanto:
 ---------------------
 
+Poistin harjoitus 4:n moduulista Gimpin ja Vlc:n asentavat package-osiot, jotta moduulin testaaminen nopeutuu. Muuten se on sama.
 
-### Header 3
+Loin myös käyttäjälle kotihakemiston apachea varten:
 
-> This is a blockquote.
-> 
-> This is the second paragraph in the blockquote.
->
-> ## This is an H2 in a blockquote
+$ mkdir /home/xubuntu/public_html
+
+Tämän jälkeen tallensin muokkaukset repositorioon komennoilla:
+
+$ git add .
+
+$ git commit
+
+Aukesi ikkuna, johon kirjoitin pyydetysti viestin muokkauksen sisällöstä.
+
+$ git pull
+
+$ git push
+
+Minulta kysyttiin terminaalissa GitHubin käyttäjätunnusta ja salasanaa. Syötettyäni ne, päivitin Gitin repositorion selaimessani, ja tiedot olivat päivittyneet sinne.
+
+
+Yhteenveto:
+---------------------
+Tässä harjoituksessa tehtiin onnistuneesti moduuli gitvarastoon, josta sitten kirjoitettiin myös raportti MarkDownilla. Ongelmia harjoituksen aikana esiintynyt ollenkaan.
+
+Lähteet:
+---------------------
+
+Harjoituksen ohjeet
+
+URL: http://terokarvinen.com/2016/aikataulu-palvelinten-hallinta-ict4tn022-1-5-op-uusi-ops-loppusyksy-2016
+
+Githubissa julkaiseminen
+
+URL: http://terokarvinen.com/2016/publish-your-project-with-github
+
+MarkDown apua
+
+URL: https://daringfireball.net/projects/markdown/basics
