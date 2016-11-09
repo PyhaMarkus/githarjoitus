@@ -9,6 +9,13 @@ Update: Bonustehtävänä voit kokeilla kloonata uusi modulisi vasta bootatulle 
 
 Tehtävien ohje otettu: http://terokarvinen.com/2016/aikataulu-palvelinten-hallinta-ict4tn022-1-5-op-uusi-ops-loppusyksy-2016
 
+Harjoituksessa käytetty laitteisto/ohjelmisto:
+---------------------
+* 16GB Kingston DataTraveler 100 G3 USB 3.0 muistitikku
+* Tietokone (Asus Z170-A, i7-6700K , 16GB DDR4 3200MHz, Evga 1070 sc)
+* Oheishärpäkkeet
+* Xubuntu 16.04.1 LTS
+
 Alustavat valmistelut:
 ---------------------
 Seuraavat toimet suoritan aina, kun alan tekemään linux-harjoitusten eri osioita.
@@ -77,7 +84,7 @@ $ nano init.pp
 
 Kyseiseen tiedostoon tein laitoin seuraavan tekstin:
 
-class asennus {
+'''class asennus {
 
 Package {ensure => "installed", allowcdrom => "true"}
  package {"gedit":}
@@ -115,10 +122,7 @@ file { "/etc/apache2/mods-enabled/userdir.load":
 
 }
 
-
-
-Tehtävänanto:
----------------------
+'''
 
 Poistin harjoitus 4:n moduulista Gimpin ja Vlc:n asentavat package-osiot, jotta moduulin testaaminen nopeutuu. Muuten se on sama.
 
