@@ -82,49 +82,7 @@ Manifests kansioon tein nanolla init.pp tiedoston.
 
 $ nano init.pp
 
-Kyseiseen tiedostoon tein laitoin seuraavan tekstin:
-
-'''class asennus {
-
-Package {ensure => "installed", allowcdrom => "true"}
- package {"gedit":}
- package { "tree":}
- package { "munin":}
- package { "apache2":}
- package { "ssh":}
-
-file { "/home/xubuntu/public_html/index.html":
- content => "It's working! Welcome user!\n",
- 
- }
-
-
- file { "/etc/apache2/mods-enabled/userdir.conf":
- ensure => "link",
- target => "../mods-available/userdir.conf",
- notify => Service ["apache2"],
- 
- }
-
-file { "/etc/apache2/mods-enabled/userdir.load":
- ensure => "link",
- target => "../mods-available/userdir.load",
- notify => Service ["apache2"],
-
-}
- 
- service { "apache2":
- ensure => "true",
- enable => "true",
-
-}
-
-
-}
-
-'''
-
-Poistin harjoitus 4:n moduulista Gimpin ja Vlc:n asentavat package-osiot, jotta moduulin testaaminen nopeutuu. Muuten se on sama.
+Kyseiseen tiedostoon tein saman moduulin, kuin harjoitus 4:ssä, paitsi poistin siitä Gimpin ja Vlc:n asentavat package-osiot, jotta moduulin testaaminen nopeutuu. Muuten se on sama.
 
 Loin myös käyttäjälle kotihakemiston apachea varten:
 
