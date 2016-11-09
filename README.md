@@ -56,6 +56,8 @@ Näyttäisi toimineen. Katsoin mitä kansiosta löytyi komennolla $ ls, ja repos
 
 Nyt tuli luoda se tiedosto, johon laitan moduulini.
 
+---------------------
+
 Moduuli:
 ---------------------
 
